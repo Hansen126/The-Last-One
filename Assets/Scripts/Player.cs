@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private SpriteRenderer darkBackgroundSprite;
+
     public TMP_Text skillCooldownText;
     [SerializeField] private bool canUseSkill = true;
     [SerializeField] private float skillCooldown;
@@ -35,6 +37,15 @@ public class Player : MonoBehaviour
 
     public bool isAttack;
 
+    public AudioSource attackAudioSource;
+    public AudioClip[] attackSound;
+
+    public AudioSource typingAudioSource;
+    public AudioClip[] typingSound;
+    public AudioClip backspaceSound;
+
+    public float attackSoundDelay = 0.2f;
+
     public EnemySpawner spawnEnemy;
     private List<Enemy> enemies = new List<Enemy>();
     private string currentInput = "";
@@ -42,6 +53,10 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (attackAudioSource == null)
+        {
+            attackAudioSource = GetComponent<AudioSource>();
+        }
         timeSurvived = 0;
         kill = 0;
         timer.text = "Time survived: " + timeSurvived;
@@ -51,6 +66,7 @@ public class Player : MonoBehaviour
         healthRemaining = maxHealth;
         timerCooldown = skillCooldown;
         Time.timeScale = 1;
+            
     }
 
     // Update is called once per frame
@@ -77,6 +93,19 @@ public class Player : MonoBehaviour
             die();
         }
 
+        if (Input.anyKeyDown)
+        {
+            if (Input.inputString.Length > 0 && char.IsLetter(Input.inputString[0]))
+            {
+                PlayTypingSound();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Backspace))
+            {
+                PlayBackspaceSound();
+            }
+        }
+
         timeSurvived += Time.deltaTime;
         updateScore();
 
@@ -90,6 +119,47 @@ public class Player : MonoBehaviour
         if(timeSurvived >= 300)
         {
             pause.Victory();
+        }
+    }
+
+    private IEnumerator DarkenBackground()
+    {
+        if (darkBackgroundSprite != null)
+        {
+            Color darkColor = new Color(110 / 255f, 97 / 255f, 138 / 255f, 1);
+            Color originalColor = darkBackgroundSprite.color;
+
+            float fadeInDuration = 0.3f;
+            float elapsedTimeFadeIn = 0f;
+
+
+            while (elapsedTimeFadeIn < fadeInDuration)
+            {
+                elapsedTimeFadeIn += Time.deltaTime;
+                float t = elapsedTimeFadeIn / fadeInDuration;
+
+                darkBackgroundSprite.color = Color.Lerp(originalColor, darkColor, t);
+                yield return null;
+            }
+
+
+            
+
+            yield return new WaitForSeconds(0.35f);
+
+            float fadeOutDuration = 0.2f;
+            float elapsedTimeFadeOut = 0f;
+
+            while (elapsedTimeFadeOut < fadeOutDuration)
+            {
+                elapsedTimeFadeOut += Time.deltaTime;
+                float t = elapsedTimeFadeOut / fadeOutDuration;
+
+                darkBackgroundSprite.color = Color.Lerp(darkColor, originalColor, t);
+                yield return null;
+            }
+
+            darkBackgroundSprite.color = originalColor;
         }
     }
 
@@ -114,6 +184,8 @@ public class Player : MonoBehaviour
             enemy.die();
             enemies.Remove(enemy);
         }
+        StartCoroutine(PlayAttackSound());
+        StartCoroutine(DarkenBackground());
         currentInput = "";
     }
 
@@ -172,6 +244,7 @@ public class Player : MonoBehaviour
                 isKnocked = false;
                 enemiesToRemove.Add(enemies[i]);
                 kill += 1;
+                StartCoroutine(PlayAttackSound());
                 Debug.Log("Total Kill: " + kill);
             }
         }
@@ -289,7 +362,7 @@ public class Player : MonoBehaviour
 
         foreach (char c in Input.inputString)
         {
-            if (c == '\b') // Backspace
+            if (c == '\b')
             {
                 if (currentInput.Length != 0)
                 {
@@ -297,7 +370,7 @@ public class Player : MonoBehaviour
                     Debug.Log("Current input: " + currentInput);
                 }
             }
-            else if (c == '\n' || c == '\r') // Enter
+            else if (c == '\n' || c == '\r')
             {
                 if (currentInput.ToLower() == "abyss" && canUseSkill == true)
                 {
@@ -322,5 +395,32 @@ public class Player : MonoBehaviour
     private void readyToAttack()
     {
         isAttack = false;
+    }
+
+    private IEnumerator PlayAttackSound()
+    {
+        yield return new WaitForSeconds(attackSoundDelay);
+
+        if (attackAudioSource != null && attackSound != null && attackSound.Length > 0)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, attackSound.Length);
+            AudioClip chosenClip = attackSound[randomIndex];
+
+            attackAudioSource.clip = chosenClip;
+            attackAudioSource.Play();
+        }
+    }
+
+    private void PlayTypingSound()
+    {
+        int randomIndex2 = UnityEngine.Random.Range(0, typingSound.Length);
+        AudioClip chosenClip2 = typingSound[randomIndex2];
+
+        typingAudioSource.PlayOneShot(chosenClip2);
+    }
+
+    private void PlayBackspaceSound()
+    {
+        typingAudioSource.PlayOneShot(backspaceSound);
     }
 }

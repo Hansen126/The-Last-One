@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private float fadeDuration = 1f;
+    private float fadeDuration = 0.5f;
     private Material enemyMaterial;
 
     private Animator anim;
@@ -60,13 +60,13 @@ public class Enemy : MonoBehaviour
 
         while (elapsedTime < fadeDuration)
         {
-            float alpha = Mathf.Lerp(0, 1, elapsedTime / fadeDuration); // Lerp alpha dari 0 ke 1
-            enemyMaterial.color = new Color(color.r, color.g, color.b, alpha); // Set alpha material
+            float alpha = Mathf.Lerp(0, 1, elapsedTime / fadeDuration);
+            enemyMaterial.color = new Color(color.r, color.g, color.b, alpha);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        enemyMaterial.color = new Color(color.r, color.g, color.b, 1); // Pastikan alpha benar-benar 1 di akhir
+        enemyMaterial.color = new Color(color.r, color.g, color.b, 1);
     }
 
     private void checkLayer()

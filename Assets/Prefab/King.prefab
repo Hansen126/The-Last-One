@@ -120,8 +120,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 642a7b9a0d83ca340a986dc189609546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.4
-  enemyName: King
+  moveSpeed: 0.45
+  enemyName: Overlord
   mainCharacter: {fileID: 0}
   player: {fileID: 0}
 --- !u!70 &5772785098213169688

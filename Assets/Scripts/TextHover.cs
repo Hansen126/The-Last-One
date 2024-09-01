@@ -8,6 +8,7 @@ public class HoverTextColorChange : MonoBehaviour, IPointerEnterHandler, IPointe
     public Color hoverColor = Color.red;
     private Color originalColor;
 
+
     void Start()
     {
         textMeshProComponent = GetComponent<TextMeshProUGUI>();

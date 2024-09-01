@@ -1264,6 +1264,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPaused: 0
   pauseMenu: {fileID: 847856341}
+  victoryMenu: {fileID: 0}
   player: {fileID: 1781912104}
 --- !u!114 &847856343
 MonoBehaviour:
@@ -1842,6 +1843,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPaused: 0
   pauseMenu: {fileID: 1014967579}
+  victoryMenu: {fileID: 0}
   player: {fileID: 1781912104}
 --- !u!1 &1099211663
 GameObject:
@@ -1875,6 +1877,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ac3c57ed060c984f85ebe0e66f6e741, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 0}
+  victoryMenu: {fileID: 0}
   player: {fileID: 1781912104}
   displayText: {fileID: 1691306265}
 --- !u!114 &1099211665
@@ -3284,6 +3288,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 85d4ecde1fb4d0840b93dce21c038470, type: 3}
   maxHealth: 4
   healthRemaining: 0
+  timeSurvived: 0
   timer: {fileID: 396927141}
   isKnocked: 0
   isDead: 0

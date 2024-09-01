@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 846648861
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1266297588, guid: 2f0fb8e7836cfbf40b5ab6d909d25d3c, type: 3}
+  m_Sprite: {fileID: -67193235, guid: 358aa8192895d5343a40cf3c18c160f5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -156,6 +156,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.4
-  enemyName: Squire
+  enemyName: Mercenary
   mainCharacter: {fileID: 0}
   player: {fileID: 0}

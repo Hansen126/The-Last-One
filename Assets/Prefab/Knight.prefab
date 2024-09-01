@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 846648861
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 755127338, guid: ee6343945ff4b2746b575554c399df49, type: 3}
+  m_Sprite: {fileID: 1972091127, guid: 57dd2f63da7e25a43b98780acd545cdf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 642a7b9a0d83ca340a986dc189609546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.5
+  moveSpeed: 0.75
   enemyName: Knight
   mainCharacter: {fileID: 0}
   player: {fileID: 0}

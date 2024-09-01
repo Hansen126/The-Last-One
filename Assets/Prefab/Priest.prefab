@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.4
-  enemyName: Priest
+  enemyName: Judge
   mainCharacter: {fileID: 0}
   player: {fileID: 0}
 --- !u!95 &8862367271583937831

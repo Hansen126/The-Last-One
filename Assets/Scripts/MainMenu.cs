@@ -12,11 +12,12 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject mediumList;
     [SerializeField] private GameObject hardList;
     [SerializeField] private GameObject hardcoreList;
+    [SerializeField] private GameObject settingsPanel;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -28,23 +29,23 @@ public class MainMenu : MonoBehaviour
     public void easy()
     {
         Time.timeScale = 1;
-        SceneManager.LoadSceneAsync("Easy");
+        SceneManager.LoadSceneAsync("Chapter 1");
     }
     public void medium()
     {
         Time.timeScale = 1;
-        SceneManager.LoadSceneAsync("Medium");
+        SceneManager.LoadSceneAsync("Chapter 2");
     }
     public void hard()
     {
         Time.timeScale = 1;
-        SceneManager.LoadSceneAsync("Hard");
+        SceneManager.LoadSceneAsync("Chapter 3");
     }
 
     public void hardcore()
     {
         Time.timeScale = 1;
-        SceneManager.LoadSceneAsync("Hardcore");
+        SceneManager.LoadSceneAsync("Endless");
     }
     public void easyMonsters()
     {
@@ -77,6 +78,7 @@ public class MainMenu : MonoBehaviour
         mediumList.SetActive(false);
         hardList.SetActive(false);
         hardcoreList.SetActive(false);
+        settingsPanel.SetActive(false);
     }
 
     public void playGame()
@@ -90,6 +92,14 @@ public class MainMenu : MonoBehaviour
     {
         levelMenu.SetActive(false);
         mainMenu.SetActive(true);
+        settingsPanel.SetActive(false);
+    }
+
+
+    public void goToSettings()
+    {
+        settingsPanel.SetActive(true);
+        mainMenu.SetActive(false); 
     }
 
     public void quitGame()
